@@ -36,3 +36,19 @@ Open main.py.
 Run the Python program.
 Choose an option from the menu and follow the prompts.
 Choose option 5 when you are ready to exit.
+
+## Assignment 9: Dual-Approach Feature Development
+
+### Manual Feature Specification
+
+**Feature Name:** Remove Expense
+
+**Purpose:**  
+Allow the user to remove an expense that was entered by mistake.
+
+**Expected Behavior:**  
+The program will display the current expenses and allow the user to select an expense to remove. If there are no expenses, the program will display a message instead of trying to remove one.
+
+**Test Cases:**
+1. Add several expenses, remove one, and verify that the correct expense is removed.
+2. Try to remove an expense when the list is empty and verify that the program displays a message without crashing.
