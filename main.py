@@ -1,6 +1,7 @@
 # Store all expense amounts entered by the user.
 expenses = []
 
+
 def add_expense():
     # AI-assisted improvement: input validation prevents the program
     # from crashing when the user enters something other than a number.
@@ -18,8 +19,8 @@ def add_expense():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
+
 def display_expenses():
-    # Tell the user when there are no expenses instead of showing an empty list.
     if not expenses:
         print("\nNo expenses have been entered.")
         return
@@ -28,12 +29,13 @@ def display_expenses():
     for expense in expenses:
         print(f"${expense:.2f}")
 
+
 def show_total():
     total = sum(expenses)
     print(f"\nTotal expenses: ${total:.2f}")
 
+
 def show_statistics():
-    # AI-assisted feature: calculate additional information from the expense list.
     if not expenses:
         print("\nNo expenses have been entered.")
         return
@@ -45,24 +47,44 @@ def show_statistics():
     print(f"Average expense: ${average:.2f}")
     print(f"Highest expense: ${highest:.2f}")
 
+
+def remove_expense():
+    if not expenses:
+        print("\nNo expenses have been entered.")
+        return
+
+    print("\nExpenses:")
+    for i, expense in enumerate(expenses, start=1):
+        print(f"{i}. ${expense:.2f}")
+
+    try:
+        choice = int(input("Enter the number of the expense to remove: "))
+
+        if 1 <= choice <= len(expenses):
+            removed_expense = expenses.pop(choice - 1)
+            print(f"${removed_expense:.2f} was removed.")
+        else:
+            print("Invalid expense number.")
+
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+
+
 def search_expenses_by_range():
-    # Validate both amounts and ensure the range is in ascending order.
-    while True:
-        try:
-            minimum = float(input("Enter the minimum amount: $"))
-            maximum = float(input("Enter the maximum amount: $"))
+    if not expenses:
+        print("\nNo expenses have been entered.")
+        return
 
-            if minimum < 0 or maximum < 0:
-                print("Please enter amounts that are zero or greater.")
-                continue
+    try:
+        minimum = float(input("Enter the minimum expense amount: $"))
+        maximum = float(input("Enter the maximum expense amount: $"))
+    except ValueError:
+        print("Invalid input. Please enter numbers.")
+        return
 
-            if minimum > maximum:
-                print("The minimum amount cannot be greater than the maximum.")
-                continue
-
-            break
-        except ValueError:
-            print("Invalid input. Please enter valid numbers.")
+    if minimum > maximum:
+        print("Minimum amount cannot be greater than maximum amount.")
+        return
 
     matching_expenses = [
         expense for expense in expenses
@@ -77,6 +99,7 @@ def search_expenses_by_range():
     for expense in matching_expenses:
         print(f"${expense:.2f}")
 
+
 # Repeat the menu until the user selects Exit.
 while True:
     print("\nExpense Tracker")
@@ -84,8 +107,9 @@ while True:
     print("2. Display Expenses")
     print("3. Show Total")
     print("4. Show Statistics")
-    print("5. Search Expenses by Range")
-    print("6. Exit")
+    print("5. Remove Expense")
+    print("6. Search Expenses by Range")
+    print("7. Exit")
 
     choice = input("Choose an option: ")
 
@@ -98,9 +122,11 @@ while True:
     elif choice == "4":
         show_statistics()
     elif choice == "5":
-        search_expenses_by_range()
+        remove_expense()
     elif choice == "6":
+        search_expenses_by_range()
+    elif choice == "7":
         print("Goodbye!")
         break
     else:
-        print("Invalid choice. Please choose 1 through 6.")
+        print("Invalid choice. Please choose 1 through 7.")
