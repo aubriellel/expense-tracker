@@ -21,7 +21,6 @@ def add_expense():
 
 
 def display_expenses():
-    # Tell the user when there are no expenses instead of showing an empty list.
     if not expenses:
         print("\nNo expenses have been entered.")
         return
@@ -37,7 +36,6 @@ def show_total():
 
 
 def show_statistics():
-    # AI-assisted feature: calculate additional information from the expense list.
     if not expenses:
         print("\nNo expenses have been entered.")
         return
@@ -72,6 +70,36 @@ def remove_expense():
         print("Invalid input. Please enter a number.")
 
 
+def search_expenses_by_range():
+    if not expenses:
+        print("\nNo expenses have been entered.")
+        return
+
+    try:
+        minimum = float(input("Enter the minimum expense amount: $"))
+        maximum = float(input("Enter the maximum expense amount: $"))
+    except ValueError:
+        print("Invalid input. Please enter numbers.")
+        return
+
+    if minimum > maximum:
+        print("Minimum amount cannot be greater than maximum amount.")
+        return
+
+    matching_expenses = [
+        expense for expense in expenses
+        if minimum <= expense <= maximum
+    ]
+
+    if not matching_expenses:
+        print("\nNo expenses were found in that range.")
+        return
+
+    print(f"\nExpenses from ${minimum:.2f} to ${maximum:.2f}:")
+    for expense in matching_expenses:
+        print(f"${expense:.2f}")
+
+
 # Repeat the menu until the user selects Exit.
 while True:
     print("\nExpense Tracker")
@@ -80,7 +108,8 @@ while True:
     print("3. Show Total")
     print("4. Show Statistics")
     print("5. Remove Expense")
-    print("6. Exit")
+    print("6. Search Expenses by Range")
+    print("7. Exit")
 
     choice = input("Choose an option: ")
 
@@ -95,7 +124,9 @@ while True:
     elif choice == "5":
         remove_expense()
     elif choice == "6":
+        search_expenses_by_range()
+    elif choice == "7":
         print("Goodbye!")
         break
     else:
-        print("Invalid choice. Please choose 1 through 6.")
+        print("Invalid choice. Please choose 1 through 7.")
