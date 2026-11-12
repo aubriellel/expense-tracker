@@ -45,6 +45,38 @@ def show_statistics():
     print(f"Average expense: ${average:.2f}")
     print(f"Highest expense: ${highest:.2f}")
 
+def search_expenses_by_range():
+    # Validate both amounts and ensure the range is in ascending order.
+    while True:
+        try:
+            minimum = float(input("Enter the minimum amount: $"))
+            maximum = float(input("Enter the maximum amount: $"))
+
+            if minimum < 0 or maximum < 0:
+                print("Please enter amounts that are zero or greater.")
+                continue
+
+            if minimum > maximum:
+                print("The minimum amount cannot be greater than the maximum.")
+                continue
+
+            break
+        except ValueError:
+            print("Invalid input. Please enter valid numbers.")
+
+    matching_expenses = [
+        expense for expense in expenses
+        if minimum <= expense <= maximum
+    ]
+
+    if not matching_expenses:
+        print("\nNo expenses were found in that range.")
+        return
+
+    print(f"\nExpenses from ${minimum:.2f} to ${maximum:.2f}:")
+    for expense in matching_expenses:
+        print(f"${expense:.2f}")
+
 # Repeat the menu until the user selects Exit.
 while True:
     print("\nExpense Tracker")
@@ -52,7 +84,8 @@ while True:
     print("2. Display Expenses")
     print("3. Show Total")
     print("4. Show Statistics")
-    print("5. Exit")
+    print("5. Search Expenses by Range")
+    print("6. Exit")
 
     choice = input("Choose an option: ")
 
@@ -65,7 +98,9 @@ while True:
     elif choice == "4":
         show_statistics()
     elif choice == "5":
+        search_expenses_by_range()
+    elif choice == "6":
         print("Goodbye!")
         break
     else:
-        print("Invalid choice. Please choose 1 through 5.")
+        print("Invalid choice. Please choose 1 through 6.")

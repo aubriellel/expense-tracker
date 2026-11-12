@@ -36,3 +36,18 @@ Open main.py.
 Run the Python program.
 Choose an option from the menu and follow the prompts.
 Choose option 5 when you are ready to exit.
+
+AI Feature Specification
+
+Feature Name: Expense Range Search
+
+Purpose:
+ Allow the user to find expenses that fall within a selected dollar range.
+
+Expected Behavior:
+ The user enters a minimum and maximum amount. The program displays all expenses within that range. If there are no matching expenses, the program displays a message instead of crashing.
+
+Test Cases:
+
+Add expenses of $10, $25, and $50, then search from $20 to $40. The program should display only $25.
+Search a range that contains no expenses and verify that the program displays a message indicating that no matching expenses were found.
